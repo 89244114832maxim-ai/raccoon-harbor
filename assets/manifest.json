@@ -1,0 +1,3414 @@
+{
+ "game": "Енотова Гавань / Raccoon Harbor",
+ "generator": "blender-scripts/build_all.py (Blender 4.2 LTS, headless)",
+ "conventions": {
+  "up_axis": "+Y (glTF)",
+  "units": "1 unit = 1 m",
+  "origin": "bottom centre / feet at y=0 (exceptions: island_base & dock_* origin = walk surface, parts go below 0)",
+  "forward": "characters and props face +Z in glTF (Blender -Y); Babylon loader __root__ handles handedness",
+  "shading": "flat palette colours, one PBR material per palette entry (roughness 0.85, metallic 0), no textures/UVs; materials named pal_<colour> are identical across files → share/dedupe in engine",
+  "compression": "none (Draco off); meshopt/gltfpack optional",
+  "animations": "characters: glTF animation groups per action, 30 fps, loops except cheer"
+ },
+ "islands": {
+  "1": "Морковная пристань",
+  "2": "Рыбацкая бухта",
+  "3": "Яблоневый склон",
+  "4": "Молочная ферма",
+  "5": "Пчелиный луг",
+  "6": "Пекарня-мельница",
+  "7": "Кофейные холмы",
+  "8": "Ягодное болото",
+  "9": "Ледяной фьорд",
+  "10": "Тропический риф",
+  "11": "Ярмарочная гора",
+  "12": "Звёздный маяк",
+  "common": "shared by all islands"
+ },
+ "palette": {
+  "sea": "#3EC5E0",
+  "sea_deep": "#1E8FB8",
+  "sand": "#F6DFA4",
+  "grass": "#7BD35A",
+  "grass_shade": "#4FA845",
+  "wood": "#C98B55",
+  "roof": "#FF7A59",
+  "ui_main": "#FFB938",
+  "brown_text": "#4A2E1F",
+  "rewarded": "#8E6CFF",
+  "positive": "#5ED17A",
+  "panel": "#FFF6E5",
+  "panel_edge": "#E8C48F",
+  "wood_dark": "#9C6438",
+  "soil": "#8A5A3B",
+  "gold": "#FFC93C",
+  "gold_dark": "#E39B2D",
+  "white": "#FFFFFF",
+  "ink": "#2B1D16",
+  "stone": "#B9B3A8",
+  "stone_dark": "#8F897F",
+  "carrot": "#FF8A2B",
+  "leaf": "#5FBF45",
+  "cabbage": "#A8E07A",
+  "cabbage_dark": "#6FBF4F",
+  "grey": "#9AA3AD",
+  "grey_dark": "#4B4F57",
+  "grey_light": "#E3E6EA",
+  "pink": "#FFB3C1",
+  "fox": "#FF8A3D",
+  "bear": "#A86B43",
+  "bear_light": "#E2B98C",
+  "beaver": "#B5774A",
+  "beaver_dark": "#7A4B2C",
+  "yellow": "#FFD447",
+  "window": "#9FE3F0",
+  "coconut": "#7A5230",
+  "red": "#F25C54",
+  "otter": "#8C5A3C",
+  "squirrel": "#D9822B",
+  "frog": "#6CCB4A",
+  "apple": "#F25C54",
+  "juice": "#FFB347",
+  "milk": "#FDFBF5",
+  "cheese": "#FFD45C",
+  "honey": "#F5A623",
+  "wax": "#FFE8A3",
+  "wheat": "#EBC46A",
+  "bread": "#D88B3E",
+  "coffee": "#6B4226",
+  "coffee_bean": "#8B5A2B",
+  "berry": "#8E4FD6",
+  "berry_red": "#E5446D",
+  "jam": "#B2245A",
+  "ice": "#D8F4FF",
+  "snow": "#F4FBFF",
+  "icecream_pink": "#FFB3C8",
+  "icecream_mint": "#A8EBC8",
+  "coral": "#FF8C78",
+  "cocktail": "#FF6FA0",
+  "candy": "#FF9ED2",
+  "candy_blue": "#8FD8FF",
+  "star": "#FFE066",
+  "cow_spot": "#3A2A22",
+  "metal": "#C9D2DA",
+  "metal_dark": "#7D8A96",
+  "fire": "#FF6A3D",
+  "smoke": "#E8E2D8",
+  "flower_pink": "#FF8FB1",
+  "flower_white": "#FFFFFF",
+  "flower_yellow": "#FFD447"
+ },
+ "assets": [
+  {
+   "name": "helper_house",
+   "file": "glb/helper_house.glb",
+   "island": "common",
+   "category": "building",
+   "purpose": "helper house",
+   "tris": 490,
+   "bytes": 35688,
+   "size_m_xyz": [
+    3.2,
+    2.91,
+    2.5
+   ],
+   "meshes": [
+    "helper_house"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_gold",
+    "pal_grass",
+    "pal_panel",
+    "pal_positive",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_ui_main",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "дом помощников (hire/upgrade helpers)"
+  },
+  {
+   "name": "house_a",
+   "file": "glb/house_a.glb",
+   "island": "common",
+   "category": "building",
+   "purpose": "house a",
+   "tris": 450,
+   "bytes": 32540,
+   "size_m_xyz": [
+    3.0,
+    3.01,
+    2.5
+   ],
+   "meshes": [
+    "house_a"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_gold",
+    "pal_grass",
+    "pal_panel",
+    "pal_roof",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "house_b",
+   "file": "glb/house_b.glb",
+   "island": "common",
+   "category": "building",
+   "purpose": "house b",
+   "tris": 394,
+   "bytes": 29004,
+   "size_m_xyz": [
+    2.6,
+    2.6,
+    2.3
+   ],
+   "meshes": [
+    "house_b"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_gold",
+    "pal_grass",
+    "pal_sand",
+    "pal_sea_deep",
+    "pal_stone_dark",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "customer_bear",
+   "file": "glb/customer_bear.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer (large)",
+   "tris": 1258,
+   "bytes": 99264,
+   "size_m_xyz": [
+    0.787,
+    1.248,
+    0.716
+   ],
+   "meshes": [
+    "customer_bear"
+   ],
+   "materials": [
+    "pal_bear",
+    "pal_bear_light",
+    "pal_ink",
+    "pal_pink",
+    "pal_sea",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_bunny",
+   "file": "glb/customer_bunny.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer",
+   "tris": 1170,
+   "bytes": 101180,
+   "size_m_xyz": [
+    0.482,
+    0.966,
+    0.447
+   ],
+   "meshes": [
+    "customer_bunny"
+   ],
+   "materials": [
+    "pal_ink",
+    "pal_panel",
+    "pal_pink",
+    "pal_rewarded",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_duck",
+   "file": "glb/customer_duck.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer (bird body type)",
+   "tris": 984,
+   "bytes": 99164,
+   "size_m_xyz": [
+    0.366,
+    0.737,
+    0.433
+   ],
+   "meshes": [
+    "customer_duck"
+   ],
+   "materials": [
+    "pal_gold_dark",
+    "pal_ink",
+    "pal_pink",
+    "pal_roof",
+    "pal_ui_main",
+    "pal_white",
+    "pal_yellow"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_fox",
+   "file": "glb/customer_fox.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer",
+   "tris": 1098,
+   "bytes": 101676,
+   "size_m_xyz": [
+    0.595,
+    0.985,
+    0.806
+   ],
+   "meshes": [
+    "customer_fox"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_fox",
+    "pal_ink",
+    "pal_pink",
+    "pal_positive",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_frog",
+   "file": "glb/customer_frog.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer (frog guest, featured on island 8 «Ягодное болото»)",
+   "tris": 920,
+   "bytes": 91020,
+   "size_m_xyz": [
+    0.43,
+    0.694,
+    0.336
+   ],
+   "meshes": [
+    "customer_frog"
+   ],
+   "materials": [
+    "pal_cabbage",
+    "pal_frog",
+    "pal_grass_shade",
+    "pal_ink",
+    "pal_roof",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "featured_island": 8,
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_penguin",
+   "file": "glb/customer_penguin.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer (penguin, featured on island 9 «Ледяной фьорд»)",
+   "tris": 1014,
+   "bytes": 95348,
+   "size_m_xyz": [
+    0.41,
+    0.764,
+    0.471
+   ],
+   "meshes": [
+    "customer_penguin"
+   ],
+   "materials": [
+    "pal_gold_dark",
+    "pal_ink",
+    "pal_pink",
+    "pal_red",
+    "pal_ui_main",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "featured_island": 9,
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_pig",
+   "file": "glb/customer_pig.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer",
+   "tris": 1046,
+   "bytes": 108928,
+   "size_m_xyz": [
+    0.595,
+    0.985,
+    0.545
+   ],
+   "meshes": [
+    "customer_pig"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_flower_pink",
+    "pal_ink",
+    "pal_pink",
+    "pal_positive",
+    "pal_roof",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "customer_sheep",
+   "file": "glb/customer_sheep.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Customer (wool body)",
+   "tris": 1382,
+   "bytes": 137612,
+   "size_m_xyz": [
+    0.537,
+    0.889,
+    0.498
+   ],
+   "meshes": [
+    "customer_sheep"
+   ],
+   "materials": [
+    "pal_bear_light",
+    "pal_brown_text",
+    "pal_ink",
+    "pal_panel",
+    "pal_pink",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "walk",
+    "walk_carry",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "helper_beaver",
+   "file": "glb/helper_beaver.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Base helper (hireable worker); recolour/hat swap for other helper cards",
+   "tris": 1324,
+   "bytes": 116848,
+   "size_m_xyz": [
+    0.537,
+    0.871,
+    0.644
+   ],
+   "meshes": [
+    "helper_beaver"
+   ],
+   "materials": [
+    "pal_bear_light",
+    "pal_beaver",
+    "pal_beaver_dark",
+    "pal_ink",
+    "pal_pink",
+    "pal_positive",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "run",
+    "carry_run",
+    "serve",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "helper_otter",
+   "file": "glb/helper_otter.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Helper variant (otter, blue cap)",
+   "tris": 1314,
+   "bytes": 115368,
+   "size_m_xyz": [
+    0.537,
+    0.878,
+    0.692
+   ],
+   "meshes": [
+    "helper_otter"
+   ],
+   "materials": [
+    "pal_bear_light",
+    "pal_beaver_dark",
+    "pal_ink",
+    "pal_otter",
+    "pal_pink",
+    "pal_sea",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "run",
+    "carry_run",
+    "serve",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "helper_squirrel",
+   "file": "glb/helper_squirrel.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Helper variant (squirrel, purple cap)",
+   "tris": 1292,
+   "bytes": 114052,
+   "size_m_xyz": [
+    0.482,
+    0.798,
+    0.604
+   ],
+   "meshes": [
+    "helper_squirrel"
+   ],
+   "materials": [
+    "pal_beaver_dark",
+    "pal_ink",
+    "pal_panel",
+    "pal_pink",
+    "pal_rewarded",
+    "pal_squirrel",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "run",
+    "carry_run",
+    "serve",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "raccoon_hero",
+   "file": "glb/raccoon_hero.glb",
+   "island": "common",
+   "category": "character",
+   "purpose": "Player hero (raccoon shopkeeper); attach goods stack to bone socket_stack (back) or socket_hands",
+   "tris": 1282,
+   "bytes": 128868,
+   "size_m_xyz": [
+    0.595,
+    0.985,
+    0.804
+   ],
+   "meshes": [
+    "raccoon_hero"
+   ],
+   "materials": [
+    "pal_grey",
+    "pal_grey_dark",
+    "pal_grey_light",
+    "pal_ink",
+    "pal_pink",
+    "pal_roof",
+    "pal_ui_main",
+    "pal_white"
+   ],
+   "animations": [
+    "idle",
+    "run",
+    "carry_idle",
+    "carry_run",
+    "serve",
+    "cheer"
+   ],
+   "notes": "skinned, 11 bones (rigid weights)",
+   "bones": [
+    "root",
+    "body",
+    "head",
+    "arm.L",
+    "arm.R",
+    "leg.L",
+    "leg.R",
+    "tail",
+    "ear.L",
+    "ear.R",
+    "socket_stack",
+    "socket_hands"
+   ],
+   "fps": 30
+  },
+  {
+   "name": "coin",
+   "file": "glb/coin.glb",
+   "island": "common",
+   "category": "currency",
+   "purpose": "coin",
+   "tris": 84,
+   "bytes": 5768,
+   "size_m_xyz": [
+    0.228,
+    0.24,
+    0.038
+   ],
+   "meshes": [
+    "coin"
+   ],
+   "materials": [
+    "pal_gold",
+    "pal_gold_dark"
+   ],
+   "animations": [],
+   "notes": "upright coin for spin VFX / fly-to-HUD; origin at bottom edge"
+  },
+  {
+   "name": "coin_stack",
+   "file": "glb/coin_stack.glb",
+   "island": "common",
+   "category": "currency",
+   "purpose": "coin stack",
+   "tris": 504,
+   "bytes": 23372,
+   "size_m_xyz": [
+    0.463,
+    0.13,
+    0.46
+   ],
+   "meshes": [
+    "coin_stack"
+   ],
+   "materials": [
+    "pal_gold",
+    "pal_gold_dark"
+   ],
+   "animations": [],
+   "notes": "pile shown on till / payout"
+  },
+  {
+   "name": "shell_icon",
+   "file": "glb/shell_icon.glb",
+   "island": "common",
+   "category": "currency",
+   "purpose": "shell icon",
+   "tris": 300,
+   "bytes": 21172,
+   "size_m_xyz": [
+    0.384,
+    0.25,
+    0.07
+   ],
+   "meshes": [
+    "shell_icon"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_panel",
+    "pal_pink"
+   ],
+   "animations": [],
+   "notes": "premium soft currency 🐚 icon mesh, stands upright facing front"
+  },
+  {
+   "name": "bench",
+   "file": "glb/bench.glb",
+   "island": "common",
+   "category": "decor",
+   "purpose": "bench",
+   "tris": 224,
+   "bytes": 14680,
+   "size_m_xyz": [
+    1.4,
+    0.875,
+    0.46
+   ],
+   "meshes": [
+    "bench"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_wood"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "fence",
+   "file": "glb/fence.glb",
+   "island": "common",
+   "category": "decor",
+   "purpose": "fence",
+   "tris": 78,
+   "bytes": 6324,
+   "size_m_xyz": [
+    2.0,
+    0.8,
+    0.133
+   ],
+   "meshes": [
+    "fence"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "2 m segment, tile along X"
+  },
+  {
+   "name": "lamp_post",
+   "file": "glb/lamp_post.glb",
+   "island": "common",
+   "category": "decor",
+   "purpose": "lamp post",
+   "tris": 78,
+   "bytes": 6596,
+   "size_m_xyz": [
+    0.32,
+    2.13,
+    0.32
+   ],
+   "meshes": [
+    "lamp_post"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_stone_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "emissive candidate: pal_yellow lantern"
+  },
+  {
+   "name": "mailbox",
+   "file": "glb/mailbox.glb",
+   "island": "common",
+   "category": "decor",
+   "purpose": "mailbox",
+   "tris": 96,
+   "bytes": 8060,
+   "size_m_xyz": [
+    0.33,
+    1.29,
+    0.456
+   ],
+   "meshes": [
+    "mailbox"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_red",
+    "pal_sea_deep",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "Почтовый ящик (daily mail rewards)"
+  },
+  {
+   "name": "signpost",
+   "file": "glb/signpost.glb",
+   "island": "common",
+   "category": "decor",
+   "purpose": "signpost",
+   "tris": 100,
+   "bytes": 7612,
+   "size_m_xyz": [
+    0.913,
+    1.4,
+    0.2
+   ],
+   "meshes": [
+    "signpost"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "dock_end",
+   "file": "glb/dock_end.glb",
+   "island": "common",
+   "category": "dock",
+   "purpose": "dock end",
+   "tris": 652,
+   "bytes": 37448,
+   "size_m_xyz": [
+    2.08,
+    2.53,
+    2.002
+   ],
+   "meshes": [
+    "dock_end"
+   ],
+   "materials": [
+    "pal_roof",
+    "pal_sand",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "end piece with bollards + life ring; front edge at -Z (glTF +Z)"
+  },
+  {
+   "name": "dock_post",
+   "file": "glb/dock_post.glb",
+   "island": "common",
+   "category": "dock",
+   "purpose": "dock post",
+   "tris": 56,
+   "bytes": 4188,
+   "size_m_xyz": [
+    0.28,
+    2.245,
+    0.28
+   ],
+   "meshes": [
+    "dock_post"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "mooring post; origin at deck level, extends 1.1 m below"
+  },
+  {
+   "name": "dock_segment",
+   "file": "glb/dock_segment.glb",
+   "island": "common",
+   "category": "dock",
+   "purpose": "dock segment",
+   "tris": 340,
+   "bytes": 20508,
+   "size_m_xyz": [
+    2.0,
+    1.7,
+    2.0
+   ],
+   "meshes": [
+    "dock_segment"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "modular 2×2 m; deck top at y=0, piles reach y=-1.7; tile along ±Z"
+  },
+  {
+   "name": "island_base",
+   "file": "glb/island_base.glb",
+   "island": "common",
+   "category": "environment",
+   "purpose": "island base",
+   "tris": 520,
+   "bytes": 28004,
+   "size_m_xyz": [
+    27.713,
+    1.612,
+    28.741
+   ],
+   "meshes": [
+    "island_base"
+   ],
+   "materials": [
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_sand"
+   ],
+   "animations": [],
+   "notes": "walk surface (grass) at y=0, radius ≈9.5 m grass / ≈12 m beach; sand plaza at -Z(glTF +Z front) for dock; sea is engine shader plane at y≈-0.25"
+  },
+  {
+   "name": "rock",
+   "file": "glb/rock.glb",
+   "island": "common",
+   "category": "environment",
+   "purpose": "rock",
+   "tris": 100,
+   "bytes": 9624,
+   "size_m_xyz": [
+    1.074,
+    0.594,
+    0.694
+   ],
+   "meshes": [
+    "rock"
+   ],
+   "materials": [
+    "pal_stone",
+    "pal_stone_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "barrel",
+   "file": "glb/barrel.glb",
+   "island": "common",
+   "category": "prop",
+   "purpose": "barrel",
+   "tris": 208,
+   "bytes": 11480,
+   "size_m_xyz": [
+    0.495,
+    0.725,
+    0.52
+   ],
+   "meshes": [
+    "barrel"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "crate",
+   "file": "glb/crate.glb",
+   "island": "common",
+   "category": "prop",
+   "purpose": "crate",
+   "tris": 108,
+   "bytes": 7652,
+   "size_m_xyz": [
+    0.612,
+    0.42,
+    0.612
+   ],
+   "meshes": [
+    "crate"
+   ],
+   "materials": [
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "0.6 m crate"
+  },
+  {
+   "name": "build_pad",
+   "file": "glb/build_pad.glb",
+   "island": "common",
+   "category": "shop",
+   "purpose": "build pad",
+   "tris": 276,
+   "bytes": 16664,
+   "size_m_xyz": [
+    2.0,
+    0.077,
+    2.0
+   ],
+   "meshes": [
+    "build_pad"
+   ],
+   "materials": [
+    "pal_gold",
+    "pal_gold_dark",
+    "pal_panel",
+    "pal_ui_main"
+   ],
+   "animations": [],
+   "notes": "upgrade/build zone 2 m; engine overlays price text + fill progress"
+  },
+  {
+   "name": "stall",
+   "file": "glb/stall.glb",
+   "island": "common",
+   "category": "shop",
+   "purpose": "stall",
+   "tris": 474,
+   "bytes": 29440,
+   "size_m_xyz": [
+    2.3,
+    2.25,
+    1.657
+   ],
+   "meshes": [
+    "stall"
+   ],
+   "materials": [
+    "pal_panel",
+    "pal_panel_edge",
+    "pal_roof",
+    "pal_ui_main",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "display slots: 3 trays at y≈1.05 m, x = -0.62/0/+0.62"
+  },
+  {
+   "name": "till",
+   "file": "glb/till.glb",
+   "island": "common",
+   "category": "shop",
+   "purpose": "till",
+   "tris": 608,
+   "bytes": 35564,
+   "size_m_xyz": [
+    1.7,
+    1.45,
+    0.9
+   ],
+   "meshes": [
+    "till"
+   ],
+   "materials": [
+    "pal_gold",
+    "pal_gold_dark",
+    "pal_panel",
+    "pal_roof",
+    "pal_sea",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "cash register counter; cashier stands at +Z side (glTF -Z), customers queue at front"
+  },
+  {
+   "name": "bush",
+   "file": "glb/bush.glb",
+   "island": "common",
+   "category": "vegetation",
+   "purpose": "bush",
+   "tris": 312,
+   "bytes": 26128,
+   "size_m_xyz": [
+    1.178,
+    0.743,
+    0.764
+   ],
+   "meshes": [
+    "bush"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_flower_white",
+    "pal_grass",
+    "pal_grass_shade"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "flower_patch",
+   "file": "glb/flower_patch.glb",
+   "island": "common",
+   "category": "vegetation",
+   "purpose": "flower patch",
+   "tris": 688,
+   "bytes": 47392,
+   "size_m_xyz": [
+    0.815,
+    0.212,
+    0.609
+   ],
+   "meshes": [
+    "flower_patch"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_flower_white",
+    "pal_flower_yellow",
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_ui_main"
+   ],
+   "animations": [],
+   "notes": "instancing-friendly decor"
+  },
+  {
+   "name": "palm_a",
+   "file": "glb/palm_a.glb",
+   "island": "common",
+   "category": "vegetation",
+   "purpose": "palm a",
+   "tris": 452,
+   "bytes": 28740,
+   "size_m_xyz": [
+    2.836,
+    3.192,
+    2.768
+   ],
+   "meshes": [
+    "palm_a"
+   ],
+   "materials": [
+    "pal_coconut",
+    "pal_grass_ds",
+    "pal_leaf_ds",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "leaves are double-sided material"
+  },
+  {
+   "name": "palm_b",
+   "file": "glb/palm_b.glb",
+   "island": "common",
+   "category": "vegetation",
+   "purpose": "palm b",
+   "tris": 452,
+   "bytes": 28740,
+   "size_m_xyz": [
+    2.849,
+    2.512,
+    2.88
+   ],
+   "meshes": [
+    "palm_b"
+   ],
+   "materials": [
+    "pal_coconut",
+    "pal_grass_ds",
+    "pal_leaf_ds",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "leaves are double-sided material"
+  },
+  {
+   "name": "tree_round",
+   "file": "glb/tree_round.glb",
+   "island": "common",
+   "category": "vegetation",
+   "purpose": "tree round",
+   "tris": 344,
+   "bytes": 28716,
+   "size_m_xyz": [
+    1.763,
+    2.498,
+    1.511
+   ],
+   "meshes": [
+    "tree_round"
+   ],
+   "materials": [
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "boat",
+   "file": "glb/boat.glb",
+   "island": "common",
+   "category": "vehicle",
+   "purpose": "boat",
+   "tris": 253,
+   "bytes": 17888,
+   "size_m_xyz": [
+    1.3,
+    2.2,
+    3.2
+   ],
+   "meshes": [
+    "boat"
+   ],
+   "materials": [
+    "pal_panel",
+    "pal_roof_ds",
+    "pal_sea_deep",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "origin at keel bottom; waterline ≈ y=0.3; bow faces -Z(glTF +Z)"
+  },
+  {
+   "name": "good_cabbage",
+   "file": "glb/good_cabbage.glb",
+   "island": 1,
+   "category": "goods",
+   "purpose": "good cabbage",
+   "tris": 176,
+   "bytes": 14416,
+   "size_m_xyz": [
+    0.259,
+    0.219,
+    0.259
+   ],
+   "meshes": [
+    "cabbage"
+   ],
+   "materials": [
+    "pal_cabbage",
+    "pal_cabbage_dark"
+   ],
+   "animations": [],
+   "notes": "goods icon"
+  },
+  {
+   "name": "good_carrot",
+   "file": "glb/good_carrot.glb",
+   "island": 1,
+   "category": "goods",
+   "purpose": "good carrot",
+   "tris": 30,
+   "bytes": 3804,
+   "size_m_xyz": [
+    0.117,
+    0.33,
+    0.126
+   ],
+   "meshes": [
+    "carrot"
+   ],
+   "materials": [
+    "pal_carrot",
+    "pal_leaf"
+   ],
+   "animations": [],
+   "notes": "goods icon; stacks 0.3 m apart"
+  },
+  {
+   "name": "good_crate_carrots",
+   "file": "glb/good_crate_carrots.glb",
+   "island": 1,
+   "category": "goods",
+   "purpose": "good crate carrots",
+   "tris": 258,
+   "bytes": 19220,
+   "size_m_xyz": [
+    0.51,
+    0.578,
+    0.51
+   ],
+   "meshes": [
+    "crate_carrots"
+   ],
+   "materials": [
+    "pal_carrot",
+    "pal_leaf",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "filled crate for stalls/boat cargo"
+  },
+  {
+   "name": "station_cabbage_bed",
+   "file": "glb/station_cabbage_bed.glb",
+   "island": 1,
+   "category": "station",
+   "purpose": "station cabbage bed",
+   "tris": 920,
+   "bytes": 63944,
+   "size_m_xyz": [
+    2.32,
+    0.745,
+    1.735
+   ],
+   "meshes": [
+    "station_cabbage_bed",
+    "station_cabbage_bed_plants"
+   ],
+   "materials": [
+    "pal_cabbage",
+    "pal_cabbage_dark",
+    "pal_soil",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "two nodes: frame + *_plants (scale plants 0→1 for grow anim)"
+  },
+  {
+   "name": "station_carrot_bed",
+   "file": "glb/station_carrot_bed.glb",
+   "island": 1,
+   "category": "station",
+   "purpose": "station carrot bed",
+   "tris": 736,
+   "bytes": 50136,
+   "size_m_xyz": [
+    2.32,
+    0.745,
+    1.735
+   ],
+   "meshes": [
+    "station_carrot_bed",
+    "station_carrot_bed_plants"
+   ],
+   "materials": [
+    "pal_carrot",
+    "pal_leaf",
+    "pal_soil",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "two nodes: frame + *_plants (scale plants 0→1 for grow anim)"
+  },
+  {
+   "name": "good_fish",
+   "file": "glb/good_fish.glb",
+   "island": 2,
+   "category": "goods",
+   "purpose": "good fish",
+   "tris": 130,
+   "bytes": 10536,
+   "size_m_xyz": [
+    0.363,
+    0.16,
+    0.14
+   ],
+   "meshes": [
+    "good_fish"
+   ],
+   "materials": [
+    "pal_ink",
+    "pal_sea",
+    "pal_sea_deep"
+   ],
+   "animations": [],
+   "notes": "goods icon (raw fish), lies on its side"
+  },
+  {
+   "name": "good_smoked_fish",
+   "file": "glb/good_smoked_fish.glb",
+   "island": 2,
+   "category": "goods",
+   "purpose": "good smoked fish",
+   "tris": 186,
+   "bytes": 15312,
+   "size_m_xyz": [
+    0.43,
+    0.19,
+    0.14
+   ],
+   "meshes": [
+    "good_smoked_fish"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_brown_text",
+    "pal_gold_dark",
+    "pal_ink",
+    "pal_wood"
+   ],
+   "animations": [],
+   "notes": "goods icon (smoked fish on plank)"
+  },
+  {
+   "name": "prop_buoy",
+   "file": "glb/prop_buoy.glb",
+   "island": 2,
+   "category": "prop",
+   "purpose": "prop buoy",
+   "tris": 142,
+   "bytes": 10612,
+   "size_m_xyz": [
+    0.58,
+    1.27,
+    0.61
+   ],
+   "meshes": [
+    "prop_buoy"
+   ],
+   "materials": [
+    "pal_metal_dark",
+    "pal_red",
+    "pal_white",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "floats: waterline ≈ y=0.3, bob in engine"
+  },
+  {
+   "name": "prop_net_rack",
+   "file": "glb/prop_net_rack.glb",
+   "island": 2,
+   "category": "prop",
+   "purpose": "prop net rack",
+   "tris": 324,
+   "bytes": 22460,
+   "size_m_xyz": [
+    2.2,
+    1.6,
+    0.12
+   ],
+   "meshes": [
+    "prop_net_rack"
+   ],
+   "materials": [
+    "pal_panel_edge",
+    "pal_roof",
+    "pal_ui_main",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "drying net rack"
+  },
+  {
+   "name": "station_fishing_pier",
+   "file": "glb/station_fishing_pier.glb",
+   "island": 2,
+   "category": "station",
+   "purpose": "station fishing pier",
+   "tris": 832,
+   "bytes": 53588,
+   "size_m_xyz": [
+    2.0,
+    3.247,
+    3.5
+   ],
+   "meshes": [
+    "station_fishing_pier"
+   ],
+   "materials": [
+    "pal_ink",
+    "pal_metal_dark",
+    "pal_red",
+    "pal_sea",
+    "pal_sea_deep",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "fishing spot: deck top y=0 (3 m long), piles below; bobber over water at -Z(glTF +Z)"
+  },
+  {
+   "name": "station_smokehouse",
+   "file": "glb/station_smokehouse.glb",
+   "island": 2,
+   "category": "station",
+   "purpose": "station smokehouse",
+   "tris": 912,
+   "bytes": 63896,
+   "size_m_xyz": [
+    2.2,
+    3.73,
+    2.024
+   ],
+   "meshes": [
+    "station_smokehouse",
+    "station_smokehouse_smoke"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_flower_pink",
+    "pal_gold",
+    "pal_gold_dark",
+    "pal_grass",
+    "pal_ink",
+    "pal_smoke",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "node *_smoke: scale/fade loop (origin at chimney top)",
+   "pivot_nodes": [
+    "station_smokehouse_smoke"
+   ]
+  },
+  {
+   "name": "good_apple",
+   "file": "glb/good_apple.glb",
+   "island": 3,
+   "category": "goods",
+   "purpose": "good apple",
+   "tris": 112,
+   "bytes": 9284,
+   "size_m_xyz": [
+    0.16,
+    0.175,
+    0.16
+   ],
+   "meshes": [
+    "good_apple"
+   ],
+   "materials": [
+    "pal_apple",
+    "pal_leaf",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "goods icon"
+  },
+  {
+   "name": "good_juice",
+   "file": "glb/good_juice.glb",
+   "island": 3,
+   "category": "goods",
+   "purpose": "good juice",
+   "tris": 112,
+   "bytes": 5924,
+   "size_m_xyz": [
+    0.114,
+    0.274,
+    0.123
+   ],
+   "meshes": [
+    "good_juice"
+   ],
+   "materials": [
+    "pal_juice",
+    "pal_panel",
+    "pal_positive"
+   ],
+   "animations": [],
+   "notes": "goods icon (apple juice bottle)"
+  },
+  {
+   "name": "good_pie",
+   "file": "glb/good_pie.glb",
+   "island": 3,
+   "category": "goods",
+   "purpose": "good pie",
+   "tris": 160,
+   "bytes": 9704,
+   "size_m_xyz": [
+    0.32,
+    0.101,
+    0.32
+   ],
+   "meshes": [
+    "good_pie"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_gold_dark"
+   ],
+   "animations": [],
+   "notes": "goods icon (apple pie)"
+  },
+  {
+   "name": "prop_apple_cart",
+   "file": "glb/prop_apple_cart.glb",
+   "island": 3,
+   "category": "prop",
+   "purpose": "prop apple cart",
+   "tris": 976,
+   "bytes": 59896,
+   "size_m_xyz": [
+    1.18,
+    0.945,
+    2.15
+   ],
+   "meshes": [
+    "prop_apple_cart"
+   ],
+   "materials": [
+    "pal_apple",
+    "pal_leaf",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "station_apple_tree",
+   "file": "glb/station_apple_tree.glb",
+   "island": 3,
+   "category": "station",
+   "purpose": "station apple tree",
+   "tris": 796,
+   "bytes": 56828,
+   "size_m_xyz": [
+    2.187,
+    2.805,
+    2.02
+   ],
+   "meshes": [
+    "station_apple_tree",
+    "station_apple_tree_apples"
+   ],
+   "materials": [
+    "pal_apple",
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_leaf",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "node *_apples: hide/scale for harvest & regrow"
+  },
+  {
+   "name": "station_juice_press",
+   "file": "glb/station_juice_press.glb",
+   "island": 3,
+   "category": "station",
+   "purpose": "station juice press",
+   "tris": 832,
+   "bytes": 46924,
+   "size_m_xyz": [
+    1.4,
+    1.976,
+    0.9
+   ],
+   "meshes": [
+    "station_juice_press"
+   ],
+   "materials": [
+    "pal_apple",
+    "pal_juice",
+    "pal_leaf",
+    "pal_metal",
+    "pal_metal_dark",
+    "pal_positive",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "apple → juice (chain step 2)"
+  },
+  {
+   "name": "station_pie_oven",
+   "file": "glb/station_pie_oven.glb",
+   "island": 3,
+   "category": "station",
+   "purpose": "station pie oven",
+   "tris": 422,
+   "bytes": 28864,
+   "size_m_xyz": [
+    2.018,
+    1.6,
+    1.37
+   ],
+   "meshes": [
+    "station_pie_oven"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_fire",
+    "pal_gold_dark",
+    "pal_ink",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "apple + flour? → pie (chain step 2)"
+  },
+  {
+   "name": "good_cheese",
+   "file": "glb/good_cheese.glb",
+   "island": 4,
+   "category": "goods",
+   "purpose": "good cheese",
+   "tris": 68,
+   "bytes": 5256,
+   "size_m_xyz": [
+    0.3,
+    0.14,
+    0.207
+   ],
+   "meshes": [
+    "good_cheese"
+   ],
+   "materials": [
+    "pal_cheese",
+    "pal_gold_dark"
+   ],
+   "animations": [],
+   "notes": "goods icon (cheese wedge)"
+  },
+  {
+   "name": "good_milk",
+   "file": "glb/good_milk.glb",
+   "island": 4,
+   "category": "goods",
+   "purpose": "good milk",
+   "tris": 112,
+   "bytes": 5184,
+   "size_m_xyz": [
+    0.124,
+    0.294,
+    0.134
+   ],
+   "meshes": [
+    "good_milk"
+   ],
+   "materials": [
+    "pal_milk",
+    "pal_sea"
+   ],
+   "animations": [],
+   "notes": "goods icon (milk bottle)"
+  },
+  {
+   "name": "prop_barn",
+   "file": "glb/prop_barn.glb",
+   "island": 4,
+   "category": "prop",
+   "purpose": "prop barn",
+   "tris": 180,
+   "bytes": 13228,
+   "size_m_xyz": [
+    3.6,
+    3.3,
+    2.9
+   ],
+   "meshes": [
+    "prop_barn"
+   ],
+   "materials": [
+    "pal_red",
+    "pal_stone_dark",
+    "pal_wheat",
+    "pal_white"
+   ],
+   "animations": [],
+   "notes": "signature farm building"
+  },
+  {
+   "name": "prop_hay_bale",
+   "file": "glb/prop_hay_bale.glb",
+   "island": 4,
+   "category": "prop",
+   "purpose": "prop hay bale",
+   "tris": 68,
+   "bytes": 5700,
+   "size_m_xyz": [
+    0.9,
+    0.62,
+    0.62
+   ],
+   "meshes": [
+    "prop_hay_bale"
+   ],
+   "materials": [
+    "pal_gold_dark",
+    "pal_wheat"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "prop_milk_can",
+   "file": "glb/prop_milk_can.glb",
+   "island": 4,
+   "category": "prop",
+   "purpose": "prop milk can",
+   "tris": 208,
+   "bytes": 12068,
+   "size_m_xyz": [
+    0.361,
+    0.74,
+    0.37
+   ],
+   "meshes": [
+    "prop_milk_can"
+   ],
+   "materials": [
+    "pal_metal",
+    "pal_metal_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "station_cheese_press",
+   "file": "glb/station_cheese_press.glb",
+   "island": 4,
+   "category": "station",
+   "purpose": "station cheese press",
+   "tris": 412,
+   "bytes": 24828,
+   "size_m_xyz": [
+    1.4,
+    1.972,
+    0.8
+   ],
+   "meshes": [
+    "station_cheese_press"
+   ],
+   "materials": [
+    "pal_cheese",
+    "pal_gold_dark",
+    "pal_metal",
+    "pal_metal_dark",
+    "pal_milk",
+    "pal_sea",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "milk → cheese (chain step 2)"
+  },
+  {
+   "name": "station_cow_pen",
+   "file": "glb/station_cow_pen.glb",
+   "island": 4,
+   "category": "station",
+   "purpose": "station cow pen",
+   "tris": 312,
+   "bytes": 20544,
+   "size_m_xyz": [
+    3.12,
+    0.805,
+    2.72
+   ],
+   "meshes": [
+    "station_cow_pen"
+   ],
+   "materials": [
+    "pal_metal",
+    "pal_milk",
+    "pal_wheat",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "3×2.6 m pen (open front); empties cow_spot / worker_spot; put animal_cow at cow_spot",
+   "sockets": [
+    "cow_spot",
+    "worker_spot"
+   ]
+  },
+  {
+   "name": "animal_cow",
+   "file": "glb/animal_cow.glb",
+   "island": 4,
+   "category": "station_animal",
+   "purpose": "animal cow",
+   "tris": 1042,
+   "bytes": 79316,
+   "size_m_xyz": [
+    0.873,
+    1.481,
+    2.048
+   ],
+   "meshes": [
+    "animal_cow"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_cow_spot",
+    "pal_ink",
+    "pal_milk",
+    "pal_panel_edge",
+    "pal_pink",
+    "pal_yellow"
+   ],
+   "animations": [
+    "idle",
+    "eat",
+    "milked"
+   ],
+   "notes": "animated station animal, 8 bones; anims idle/eat/milked; place inside station_cow_pen"
+  },
+  {
+   "name": "good_candle",
+   "file": "glb/good_candle.glb",
+   "island": 5,
+   "category": "goods",
+   "purpose": "good candle",
+   "tris": 86,
+   "bytes": 8496,
+   "size_m_xyz": [
+    0.143,
+    0.34,
+    0.15
+   ],
+   "meshes": [
+    "good_candle"
+   ],
+   "materials": [
+    "pal_fire",
+    "pal_ink",
+    "pal_metal",
+    "pal_wax",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "goods icon (candle; flame material pal_fire/yellow — emissive candidate)"
+  },
+  {
+   "name": "good_honey",
+   "file": "glb/good_honey.glb",
+   "island": 5,
+   "category": "goods",
+   "purpose": "good honey",
+   "tris": 168,
+   "bytes": 10180,
+   "size_m_xyz": [
+    0.2,
+    0.245,
+    0.2
+   ],
+   "meshes": [
+    "good_honey"
+   ],
+   "materials": [
+    "pal_honey",
+    "pal_panel",
+    "pal_roof"
+   ],
+   "animations": [],
+   "notes": "goods icon (honey jar)"
+  },
+  {
+   "name": "prop_bee",
+   "file": "glb/prop_bee.glb",
+   "island": 5,
+   "category": "prop",
+   "purpose": "prop bee",
+   "tris": 220,
+   "bytes": 15232,
+   "size_m_xyz": [
+    0.227,
+    0.163,
+    0.25
+   ],
+   "meshes": [
+    "prop_bee"
+   ],
+   "materials": [
+    "pal_ink",
+    "pal_white",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "ambient flyer (bob/orbit in engine); origin under body"
+  },
+  {
+   "name": "prop_sunflower",
+   "file": "glb/prop_sunflower.glb",
+   "island": 5,
+   "category": "prop",
+   "purpose": "prop sunflower",
+   "tris": 300,
+   "bytes": 22220,
+   "size_m_xyz": [
+    0.455,
+    1.522,
+    0.119
+   ],
+   "meshes": [
+    "prop_sunflower"
+   ],
+   "materials": [
+    "pal_coffee_bean",
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "meadow decor (instance)"
+  },
+  {
+   "name": "station_beehive",
+   "file": "glb/station_beehive.glb",
+   "island": 5,
+   "category": "station",
+   "purpose": "station beehive",
+   "tris": 912,
+   "bytes": 54476,
+   "size_m_xyz": [
+    1.186,
+    1.41,
+    1.088
+   ],
+   "meshes": [
+    "station_beehive"
+   ],
+   "materials": [
+    "pal_honey",
+    "pal_ink",
+    "pal_panel",
+    "pal_roof",
+    "pal_wax",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "skep hive on stand (honey station)"
+  },
+  {
+   "name": "station_candle_maker",
+   "file": "glb/station_candle_maker.glb",
+   "island": 5,
+   "category": "station",
+   "purpose": "station candle maker",
+   "tris": 358,
+   "bytes": 24252,
+   "size_m_xyz": [
+    1.5,
+    1.85,
+    0.8
+   ],
+   "meshes": [
+    "station_candle_maker"
+   ],
+   "materials": [
+    "pal_fire",
+    "pal_ink",
+    "pal_metal_dark",
+    "pal_wax",
+    "pal_wood",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "honey/wax → candles (chain step 2)"
+  },
+  {
+   "name": "good_bread",
+   "file": "glb/good_bread.glb",
+   "island": 6,
+   "category": "goods",
+   "purpose": "good bread",
+   "tris": 136,
+   "bytes": 9656,
+   "size_m_xyz": [
+    0.323,
+    0.15,
+    0.18
+   ],
+   "meshes": [
+    "good_bread"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_wheat"
+   ],
+   "animations": [],
+   "notes": "goods icon (bread loaf)"
+  },
+  {
+   "name": "good_flour",
+   "file": "glb/good_flour.glb",
+   "island": 6,
+   "category": "goods",
+   "purpose": "good flour",
+   "tris": 162,
+   "bytes": 11816,
+   "size_m_xyz": [
+    0.297,
+    0.392,
+    0.278
+   ],
+   "meshes": [
+    "good_flour"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_panel",
+    "pal_wheat"
+   ],
+   "animations": [],
+   "notes": "goods icon (flour sack)"
+  },
+  {
+   "name": "good_wheat",
+   "file": "glb/good_wheat.glb",
+   "island": 6,
+   "category": "goods",
+   "purpose": "good wheat",
+   "tris": 164,
+   "bytes": 12816,
+   "size_m_xyz": [
+    0.126,
+    0.455,
+    0.165
+   ],
+   "meshes": [
+    "good_wheat"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_gold_dark",
+    "pal_wheat"
+   ],
+   "animations": [],
+   "notes": "goods icon (wheat sheaf)"
+  },
+  {
+   "name": "station_bakery_oven",
+   "file": "glb/station_bakery_oven.glb",
+   "island": 6,
+   "category": "station",
+   "purpose": "station bakery oven",
+   "tris": 388,
+   "bytes": 28132,
+   "size_m_xyz": [
+    2.525,
+    2.67,
+    1.375
+   ],
+   "meshes": [
+    "station_bakery_oven"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_fire",
+    "pal_ink",
+    "pal_red",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "flour → bread (chain step 3)"
+  },
+  {
+   "name": "station_wheat_field",
+   "file": "glb/station_wheat_field.glb",
+   "island": 6,
+   "category": "station",
+   "purpose": "station wheat field",
+   "tris": 952,
+   "bytes": 62980,
+   "size_m_xyz": [
+    2.32,
+    0.89,
+    1.735
+   ],
+   "meshes": [
+    "station_wheat_field",
+    "station_wheat_field_plants"
+   ],
+   "materials": [
+    "pal_gold_dark",
+    "pal_soil",
+    "pal_wheat",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "frame + *_plants (grow anim)"
+  },
+  {
+   "name": "station_windmill",
+   "file": "glb/station_windmill.glb",
+   "island": 6,
+   "category": "station",
+   "purpose": "station windmill",
+   "tris": 586,
+   "bytes": 39896,
+   "size_m_xyz": [
+    4.85,
+    5.435,
+    2.283
+   ],
+   "meshes": [
+    "station_windmill",
+    "station_windmill_sails"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_panel",
+    "pal_roof",
+    "pal_stone_dark",
+    "pal_wheat",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "mill: wheat → flour; node *_sails pivots at hub, spin around glTF Z",
+   "pivot_nodes": [
+    "station_windmill_sails"
+   ]
+  },
+  {
+   "name": "good_coffee_beans",
+   "file": "glb/good_coffee_beans.glb",
+   "island": 7,
+   "category": "goods",
+   "purpose": "good coffee beans",
+   "tris": 200,
+   "bytes": 14100,
+   "size_m_xyz": [
+    0.278,
+    0.326,
+    0.249
+   ],
+   "meshes": [
+    "good_coffee_beans"
+   ],
+   "materials": [
+    "pal_coffee",
+    "pal_panel_edge"
+   ],
+   "animations": [],
+   "notes": "goods icon (bag of beans)"
+  },
+  {
+   "name": "good_coffee_cup",
+   "file": "glb/good_coffee_cup.glb",
+   "island": 7,
+   "category": "goods",
+   "purpose": "good coffee cup",
+   "tris": 168,
+   "bytes": 11032,
+   "size_m_xyz": [
+    0.203,
+    0.128,
+    0.2
+   ],
+   "meshes": [
+    "good_coffee_cup"
+   ],
+   "materials": [
+    "pal_coffee",
+    "pal_milk",
+    "pal_white"
+   ],
+   "animations": [],
+   "notes": "goods icon (cup on saucer)"
+  },
+  {
+   "name": "prop_cafe_table",
+   "file": "glb/prop_cafe_table.glb",
+   "island": 7,
+   "category": "prop",
+   "purpose": "prop cafe table",
+   "tris": 534,
+   "bytes": 34664,
+   "size_m_xyz": [
+    2.0,
+    2.1,
+    1.95
+   ],
+   "meshes": [
+    "prop_cafe_table"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_coffee",
+    "pal_panel",
+    "pal_panel_ds",
+    "pal_roof_ds",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "table + 2 chairs + parasol; empties seat_0/seat_1 for seated guests",
+   "sockets": [
+    "seat_0",
+    "seat_1"
+   ]
+  },
+  {
+   "name": "station_coffee_bush",
+   "file": "glb/station_coffee_bush.glb",
+   "island": 7,
+   "category": "station",
+   "purpose": "station coffee bush",
+   "tris": 786,
+   "bytes": 56144,
+   "size_m_xyz": [
+    1.775,
+    1.27,
+    1.016
+   ],
+   "meshes": [
+    "station_coffee_bush",
+    "station_coffee_bush_cherries"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_panel_edge",
+    "pal_red",
+    "pal_soil",
+    "pal_stone"
+   ],
+   "animations": [],
+   "notes": "coffee cherries node for harvest"
+  },
+  {
+   "name": "station_coffee_machine",
+   "file": "glb/station_coffee_machine.glb",
+   "island": 7,
+   "category": "station",
+   "purpose": "station coffee machine",
+   "tris": 992,
+   "bytes": 55236,
+   "size_m_xyz": [
+    1.68,
+    1.682,
+    0.89
+   ],
+   "meshes": [
+    "station_coffee_machine"
+   ],
+   "materials": [
+    "pal_coffee",
+    "pal_ink",
+    "pal_metal",
+    "pal_metal_dark",
+    "pal_red",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "beans → coffee; customers then sit at prop_cafe_table"
+  },
+  {
+   "name": "good_berries",
+   "file": "glb/good_berries.glb",
+   "island": 8,
+   "category": "goods",
+   "purpose": "good berries",
+   "tris": 336,
+   "bytes": 23168,
+   "size_m_xyz": [
+    0.284,
+    0.225,
+    0.28
+   ],
+   "meshes": [
+    "good_berries"
+   ],
+   "materials": [
+    "pal_berry",
+    "pal_berry_red",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "goods icon (berry basket)"
+  },
+  {
+   "name": "good_jam",
+   "file": "glb/good_jam.glb",
+   "island": 8,
+   "category": "goods",
+   "purpose": "good jam",
+   "tris": 168,
+   "bytes": 10204,
+   "size_m_xyz": [
+    0.19,
+    0.22,
+    0.19
+   ],
+   "meshes": [
+    "good_jam"
+   ],
+   "materials": [
+    "pal_jam",
+    "pal_panel",
+    "pal_red"
+   ],
+   "animations": [],
+   "notes": "goods icon (jam jar)"
+  },
+  {
+   "name": "prop_cattails",
+   "file": "glb/prop_cattails.glb",
+   "island": 8,
+   "category": "prop",
+   "purpose": "prop cattails",
+   "tris": 192,
+   "bytes": 13268,
+   "size_m_xyz": [
+    0.55,
+    1.419,
+    0.335
+   ],
+   "meshes": [
+    "prop_cattails"
+   ],
+   "materials": [
+    "pal_coffee",
+    "pal_grass",
+    "pal_grass_shade"
+   ],
+   "animations": [],
+   "notes": "swamp decor (instance)"
+  },
+  {
+   "name": "prop_lily_pad",
+   "file": "glb/prop_lily_pad.glb",
+   "island": 8,
+   "category": "prop",
+   "purpose": "prop lily pad",
+   "tris": 70,
+   "bytes": 6352,
+   "size_m_xyz": [
+    0.77,
+    0.155,
+    0.791
+   ],
+   "meshes": [
+    "prop_lily_pad"
+   ],
+   "materials": [
+    "pal_flower_pink",
+    "pal_grass",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "floats on water"
+  },
+  {
+   "name": "station_berry_bush",
+   "file": "glb/station_berry_bush.glb",
+   "island": 8,
+   "category": "station",
+   "purpose": "station berry bush",
+   "tris": 758,
+   "bytes": 53632,
+   "size_m_xyz": [
+    1.688,
+    0.9,
+    1.283
+   ],
+   "meshes": [
+    "station_berry_bush",
+    "station_berry_bush_berries"
+   ],
+   "materials": [
+    "pal_berry",
+    "pal_berry_red",
+    "pal_grass",
+    "pal_grass_shade",
+    "pal_wood"
+   ],
+   "animations": [],
+   "notes": "berries node for harvest"
+  },
+  {
+   "name": "station_jam_cauldron",
+   "file": "glb/station_jam_cauldron.glb",
+   "island": 8,
+   "category": "station",
+   "purpose": "station jam cauldron",
+   "tris": 614,
+   "bytes": 37700,
+   "size_m_xyz": [
+    1.553,
+    1.577,
+    1.0
+   ],
+   "meshes": [
+    "station_jam_cauldron"
+   ],
+   "materials": [
+    "pal_berry",
+    "pal_fire",
+    "pal_jam",
+    "pal_metal_dark",
+    "pal_panel",
+    "pal_panel_edge",
+    "pal_wood",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "berries → jam (chain step 2)"
+  },
+  {
+   "name": "good_ice_cream",
+   "file": "glb/good_ice_cream.glb",
+   "island": 9,
+   "category": "goods",
+   "purpose": "good ice cream",
+   "tris": 194,
+   "bytes": 14940,
+   "size_m_xyz": [
+    0.15,
+    0.425,
+    0.15
+   ],
+   "meshes": [
+    "good_ice_cream"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_icecream_mint",
+    "pal_icecream_pink",
+    "pal_red"
+   ],
+   "animations": [],
+   "notes": "goods icon (2-scoop cone)"
+  },
+  {
+   "name": "good_popsicle",
+   "file": "glb/good_popsicle.glb",
+   "island": 9,
+   "category": "goods",
+   "purpose": "good popsicle",
+   "tris": 84,
+   "bytes": 7500,
+   "size_m_xyz": [
+    0.092,
+    0.285,
+    0.042
+   ],
+   "meshes": [
+    "good_popsicle"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_icecream_pink",
+    "pal_wood"
+   ],
+   "animations": [],
+   "notes": "goods icon (frozen treat from freezer)"
+  },
+  {
+   "name": "prop_ice_floe",
+   "file": "glb/prop_ice_floe.glb",
+   "island": 9,
+   "category": "prop",
+   "purpose": "prop ice floe",
+   "tris": 64,
+   "bytes": 4440,
+   "size_m_xyz": [
+    2.128,
+    0.35,
+    1.778
+   ],
+   "meshes": [
+    "prop_ice_floe"
+   ],
+   "materials": [
+    "pal_ice",
+    "pal_snow"
+   ],
+   "animations": [],
+   "notes": "floating ice; waterline ≈ y=0.1"
+  },
+  {
+   "name": "prop_igloo",
+   "file": "glb/prop_igloo.glb",
+   "island": 9,
+   "category": "prop",
+   "purpose": "prop igloo",
+   "tris": 312,
+   "bytes": 19112,
+   "size_m_xyz": [
+    2.2,
+    1.03,
+    2.42
+   ],
+   "meshes": [
+    "prop_igloo"
+   ],
+   "materials": [
+    "pal_ice",
+    "pal_ink",
+    "pal_snow"
+   ],
+   "animations": [],
+   "notes": "signature decor"
+  },
+  {
+   "name": "prop_snowy_pine",
+   "file": "glb/prop_snowy_pine.glb",
+   "island": 9,
+   "category": "prop",
+   "purpose": "prop snowy pine",
+   "tris": 104,
+   "bytes": 8292,
+   "size_m_xyz": [
+    1.5,
+    2.16,
+    1.5
+   ],
+   "meshes": [
+    "prop_snowy_pine"
+   ],
+   "materials": [
+    "pal_grass_shade",
+    "pal_snow",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "station_freezer",
+   "file": "glb/station_freezer.glb",
+   "island": 9,
+   "category": "station",
+   "purpose": "station freezer",
+   "tris": 324,
+   "bytes": 24604,
+   "size_m_xyz": [
+    1.52,
+    1.155,
+    0.952
+   ],
+   "meshes": [
+    "station_freezer"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_ice",
+    "pal_icecream_mint",
+    "pal_icecream_pink",
+    "pal_metal_dark",
+    "pal_snow",
+    "pal_white"
+   ],
+   "animations": [],
+   "notes": "морозилка: produces popsicles / stores ice cream"
+  },
+  {
+   "name": "station_ice_cream_machine",
+   "file": "glb/station_ice_cream_machine.glb",
+   "island": 9,
+   "category": "station",
+   "purpose": "station ice cream machine",
+   "tris": 642,
+   "bytes": 44784,
+   "size_m_xyz": [
+    1.58,
+    1.92,
+    0.88
+   ],
+   "meshes": [
+    "station_ice_cream_machine"
+   ],
+   "materials": [
+    "pal_bread",
+    "pal_candy_blue",
+    "pal_icecream_mint",
+    "pal_icecream_pink",
+    "pal_metal",
+    "pal_milk",
+    "pal_red",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "milk/berries → ice cream"
+  },
+  {
+   "name": "good_cocktail",
+   "file": "glb/good_cocktail.glb",
+   "island": 10,
+   "category": "goods",
+   "purpose": "good cocktail",
+   "tris": 120,
+   "bytes": 10692,
+   "size_m_xyz": [
+    0.201,
+    0.4,
+    0.16
+   ],
+   "meshes": [
+    "good_cocktail"
+   ],
+   "materials": [
+    "pal_cocktail",
+    "pal_juice",
+    "pal_positive",
+    "pal_window",
+    "pal_wood"
+   ],
+   "animations": [],
+   "notes": "goods icon (tropical cocktail)"
+  },
+  {
+   "name": "good_coconut",
+   "file": "glb/good_coconut.glb",
+   "island": 10,
+   "category": "goods",
+   "purpose": "good coconut",
+   "tris": 120,
+   "bytes": 9244,
+   "size_m_xyz": [
+    0.22,
+    0.349,
+    0.22
+   ],
+   "meshes": [
+    "good_coconut"
+   ],
+   "materials": [
+    "pal_coconut",
+    "pal_panel",
+    "pal_roof"
+   ],
+   "animations": [],
+   "notes": "goods icon (coconut with straw)"
+  },
+  {
+   "name": "prop_beach_umbrella",
+   "file": "glb/prop_beach_umbrella.glb",
+   "island": 10,
+   "category": "prop",
+   "purpose": "prop beach umbrella",
+   "tris": 52,
+   "bytes": 6356,
+   "size_m_xyz": [
+    2.2,
+    2.25,
+    2.2
+   ],
+   "meshes": [
+    "prop_beach_umbrella"
+   ],
+   "materials": [
+    "pal_panel",
+    "pal_panel_ds",
+    "pal_roof",
+    "pal_sea_ds"
+   ],
+   "animations": [],
+   "notes": ""
+  },
+  {
+   "name": "prop_coral",
+   "file": "glb/prop_coral.glb",
+   "island": 10,
+   "category": "prop",
+   "purpose": "prop coral",
+   "tris": 236,
+   "bytes": 17140,
+   "size_m_xyz": [
+    0.693,
+    0.782,
+    0.604
+   ],
+   "meshes": [
+    "prop_coral"
+   ],
+   "materials": [
+    "pal_coral",
+    "pal_rewarded",
+    "pal_stone",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "reef decor (shallows)"
+  },
+  {
+   "name": "prop_delivery_boat",
+   "file": "glb/prop_delivery_boat.glb",
+   "island": 10,
+   "category": "prop",
+   "purpose": "prop delivery boat",
+   "tris": 517,
+   "bytes": 34624,
+   "size_m_xyz": [
+    1.3,
+    2.2,
+    3.2
+   ],
+   "meshes": [
+    "prop_delivery_boat"
+   ],
+   "materials": [
+    "pal_coconut",
+    "pal_panel",
+    "pal_roof",
+    "pal_roof_ds",
+    "pal_sea_deep",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "лодочная доставка; same base as boat; empty \"cargo\" for loaded goods",
+   "sockets": [
+    "cargo"
+   ]
+  },
+  {
+   "name": "station_cocktail_bar",
+   "file": "glb/station_cocktail_bar.glb",
+   "island": 10,
+   "category": "station",
+   "purpose": "station cocktail bar",
+   "tris": 522,
+   "bytes": 34416,
+   "size_m_xyz": [
+    2.808,
+    2.25,
+    2.82
+   ],
+   "meshes": [
+    "station_cocktail_bar"
+   ],
+   "materials": [
+    "pal_cocktail",
+    "pal_gold_dark",
+    "pal_ink",
+    "pal_juice",
+    "pal_metal",
+    "pal_wheat",
+    "pal_window",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "coconut + juice → cocktail"
+  },
+  {
+   "name": "station_coconut_palm",
+   "file": "glb/station_coconut_palm.glb",
+   "island": 10,
+   "category": "station",
+   "purpose": "station coconut palm",
+   "tris": 648,
+   "bytes": 40176,
+   "size_m_xyz": [
+    2.861,
+    3.202,
+    2.768
+   ],
+   "meshes": [
+    "station_coconut_palm"
+   ],
+   "materials": [
+    "pal_coconut",
+    "pal_grass_ds",
+    "pal_leaf_ds",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "coconut source"
+  },
+  {
+   "name": "good_cotton_candy",
+   "file": "glb/good_cotton_candy.glb",
+   "island": 11,
+   "category": "goods",
+   "purpose": "good cotton candy",
+   "tris": 48,
+   "bytes": 5348,
+   "size_m_xyz": [
+    0.183,
+    0.38,
+    0.17
+   ],
+   "meshes": [
+    "good_cotton_candy"
+   ],
+   "materials": [
+    "pal_candy",
+    "pal_white"
+   ],
+   "animations": [],
+   "notes": "goods icon"
+  },
+  {
+   "name": "good_ticket",
+   "file": "glb/good_ticket.glb",
+   "island": 11,
+   "category": "goods",
+   "purpose": "good ticket",
+   "tris": 120,
+   "bytes": 9524,
+   "size_m_xyz": [
+    0.255,
+    0.12,
+    0.037
+   ],
+   "meshes": [
+    "good_ticket"
+   ],
+   "materials": [
+    "pal_roof",
+    "pal_star",
+    "pal_ui_main"
+   ],
+   "animations": [],
+   "notes": "attraction ticket (sold at carousel / ferris wheel)"
+  },
+  {
+   "name": "prop_balloon_bundle",
+   "file": "glb/prop_balloon_bundle.glb",
+   "island": 11,
+   "category": "prop",
+   "purpose": "prop balloon bundle",
+   "tris": 396,
+   "bytes": 15332,
+   "size_m_xyz": [
+    0.79,
+    2.005,
+    0.57
+   ],
+   "meshes": [
+    "prop_balloon_bundle"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_red",
+    "pal_rewarded",
+    "pal_white",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "fair decor"
+  },
+  {
+   "name": "prop_fair_tent",
+   "file": "glb/prop_fair_tent.glb",
+   "island": 11,
+   "category": "prop",
+   "purpose": "prop fair tent",
+   "tris": 84,
+   "bytes": 9268,
+   "size_m_xyz": [
+    2.9,
+    2.7,
+    2.9
+   ],
+   "meshes": [
+    "prop_fair_tent"
+   ],
+   "materials": [
+    "pal_ink",
+    "pal_roof_ds",
+    "pal_ui_main_ds",
+    "pal_white",
+    "pal_white_ds",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "fair decor / game booth"
+  },
+  {
+   "name": "station_carousel",
+   "file": "glb/station_carousel.glb",
+   "island": 11,
+   "category": "station",
+   "purpose": "station carousel",
+   "tris": 948,
+   "bytes": 62224,
+   "size_m_xyz": [
+    4.4,
+    4.1,
+    4.4
+   ],
+   "meshes": [
+    "station_carousel",
+    "station_carousel_spin"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_gold",
+    "pal_icecream_mint",
+    "pal_icecream_pink",
+    "pal_panel_edge",
+    "pal_rewarded",
+    "pal_roof_ds",
+    "pal_star",
+    "pal_ui_main",
+    "pal_white",
+    "pal_white_ds",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "attraction; node *_spin rotates about glTF Y (origin at platform centre)",
+   "pivot_nodes": [
+    "station_carousel_spin"
+   ]
+  },
+  {
+   "name": "station_cotton_candy",
+   "file": "glb/station_cotton_candy.glb",
+   "island": 11,
+   "category": "station",
+   "purpose": "station cotton candy",
+   "tris": 434,
+   "bytes": 31608,
+   "size_m_xyz": [
+    1.7,
+    2.188,
+    1.617
+   ],
+   "meshes": [
+    "station_cotton_candy"
+   ],
+   "materials": [
+    "pal_candy",
+    "pal_candy_ds",
+    "pal_metal",
+    "pal_metal_dark",
+    "pal_roof",
+    "pal_white",
+    "pal_white_ds"
+   ],
+   "animations": [],
+   "notes": "sugar → cotton candy"
+  },
+  {
+   "name": "station_ferris_wheel",
+   "file": "glb/station_ferris_wheel.glb",
+   "island": 11,
+   "category": "station",
+   "purpose": "station ferris wheel",
+   "tris": 828,
+   "bytes": 55352,
+   "size_m_xyz": [
+    5.12,
+    5.648,
+    1.675
+   ],
+   "meshes": [
+    "station_ferris_wheel",
+    "station_ferris_wheel_wheel",
+    "station_ferris_wheel_gondola_0",
+    "station_ferris_wheel_gondola_1",
+    "station_ferris_wheel_gondola_2",
+    "station_ferris_wheel_gondola_3",
+    "station_ferris_wheel_gondola_4",
+    "station_ferris_wheel_gondola_5"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_icecream_mint",
+    "pal_icecream_pink",
+    "pal_metal_dark",
+    "pal_panel_edge",
+    "pal_rewarded",
+    "pal_roof",
+    "pal_sea",
+    "pal_ui_main",
+    "pal_white",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "attraction; *_wheel spins about glTF Z at hub; gondola_0..5 pivot at hang point — orbit them with the wheel & keep upright",
+   "pivot_nodes": [
+    "station_ferris_wheel_wheel",
+    "station_ferris_wheel_gondola_0",
+    "station_ferris_wheel_gondola_1",
+    "station_ferris_wheel_gondola_2",
+    "station_ferris_wheel_gondola_3",
+    "station_ferris_wheel_gondola_4",
+    "station_ferris_wheel_gondola_5"
+   ]
+  },
+  {
+   "name": "lighthouse",
+   "file": "glb/lighthouse.glb",
+   "island": 12,
+   "category": "building",
+   "purpose": "lighthouse",
+   "tris": 714,
+   "bytes": 46724,
+   "size_m_xyz": [
+    2.985,
+    7.66,
+    2.547
+   ],
+   "meshes": [
+    "lighthouse",
+    "lighthouse_lamp"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_gold",
+    "pal_red",
+    "pal_star",
+    "pal_stone",
+    "pal_stone_dark",
+    "pal_white",
+    "pal_window",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "Маяк (talent-tree building, all islands) & O12 landmark; lighthouse_lamp: emissive + spin about glTF Y",
+   "pivot_nodes": [
+    "lighthouse_lamp"
+   ]
+  },
+  {
+   "name": "good_gift_box",
+   "file": "glb/good_gift_box.glb",
+   "island": 12,
+   "category": "goods",
+   "purpose": "good gift box",
+   "tris": 184,
+   "bytes": 12716,
+   "size_m_xyz": [
+    0.275,
+    0.348,
+    0.275
+   ],
+   "meshes": [
+    "good_gift_box"
+   ],
+   "materials": [
+    "pal_rewarded",
+    "pal_ui_main"
+   ],
+   "animations": [],
+   "notes": "Grand Fair goods (mixed-goods gift box)"
+  },
+  {
+   "name": "good_star_trophy",
+   "file": "glb/good_star_trophy.glb",
+   "island": 12,
+   "category": "goods",
+   "purpose": "good star trophy",
+   "tris": 140,
+   "bytes": 11216,
+   "size_m_xyz": [
+    0.209,
+    0.33,
+    0.18
+   ],
+   "meshes": [
+    "good_star_trophy"
+   ],
+   "materials": [
+    "pal_brown_text",
+    "pal_gold",
+    "pal_gold_dark",
+    "pal_star"
+   ],
+   "animations": [],
+   "notes": "finale reward / Mayor order icon"
+  },
+  {
+   "name": "prop_firework_crate",
+   "file": "glb/prop_firework_crate.glb",
+   "island": 12,
+   "category": "prop",
+   "purpose": "prop firework crate",
+   "tris": 298,
+   "bytes": 22452,
+   "size_m_xyz": [
+    0.612,
+    1.19,
+    0.612
+   ],
+   "meshes": [
+    "prop_firework_crate"
+   ],
+   "materials": [
+    "pal_candy_blue",
+    "pal_ink",
+    "pal_positive",
+    "pal_red",
+    "pal_rewarded",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark",
+    "pal_yellow"
+   ],
+   "animations": [],
+   "notes": "event / finale decor (spawn confetti VFX)"
+  },
+  {
+   "name": "prop_star_statue",
+   "file": "glb/prop_star_statue.glb",
+   "island": 12,
+   "category": "prop",
+   "purpose": "prop star statue",
+   "tris": 128,
+   "bytes": 10788,
+   "size_m_xyz": [
+    1.141,
+    2.05,
+    1.0
+   ],
+   "meshes": [
+    "prop_star_statue"
+   ],
+   "materials": [
+    "pal_gold_dark",
+    "pal_star",
+    "pal_stone",
+    "pal_stone_dark"
+   ],
+   "animations": [],
+   "notes": "O12 landmark / prestige decor"
+  },
+  {
+   "name": "station_grand_fair",
+   "file": "glb/station_grand_fair.glb",
+   "island": 12,
+   "category": "station",
+   "purpose": "station grand fair",
+   "tris": 848,
+   "bytes": 60108,
+   "size_m_xyz": [
+    4.276,
+    4.15,
+    2.4
+   ],
+   "meshes": [
+    "station_grand_fair"
+   ],
+   "materials": [
+    "pal_apple",
+    "pal_bread",
+    "pal_candy",
+    "pal_candy_blue",
+    "pal_carrot",
+    "pal_cheese",
+    "pal_cocktail",
+    "pal_coffee",
+    "pal_honey",
+    "pal_icecream_pink",
+    "pal_jam",
+    "pal_rewarded",
+    "pal_roof",
+    "pal_sea",
+    "pal_star",
+    "pal_ui_main",
+    "pal_white",
+    "pal_wood",
+    "pal_wood_dark"
+   ],
+   "animations": [],
+   "notes": "«Великая ярмарка» finale stage: one crate per island good; empty mayor_spot",
+   "sockets": [
+    "mayor_spot"
+   ]
+  }
+ ]
+}
